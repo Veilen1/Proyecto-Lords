@@ -13,14 +13,11 @@ app.use(express.json());
 app.get('/api', (req, res) => res.send('API funcionando'));
 app.get('/', (req, res) => res.send('API funcionando'));
 
+// Exportar la aplicación para que Vercel la reconozca como serverless
+module.exports = app;
+
 // Conexión con MongoDB
-const PORT = process.env.PORT || 3000;
 mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => {
-    app.listen(PORT, () => console.log(`Servidor corriendo en el puerto ${PORT}`));
-  })
+  .connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('Conectado a MongoDB'))
   .catch((err) => console.error(err));
-
-
-  module.exports = app;
