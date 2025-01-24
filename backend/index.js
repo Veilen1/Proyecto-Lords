@@ -13,8 +13,6 @@ app.use(express.json());
 app.get('/api', (req, res) => res.send('API funcionando'));
 app.get('/', (req, res) => res.send('API funcionando'));
 
-// Exportar la aplicación para que Vercel la reconozca como serverless
-module.exports = app;
 
 // Conexión con MongoDB
 mongoose
