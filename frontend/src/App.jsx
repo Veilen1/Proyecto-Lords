@@ -1,10 +1,23 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import reactLogo from './assets/react.svg';
+import viteLogo from '/vite.svg';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  const [apiResponse, setApiResponse] = useState('');
+
+  useEffect(() => {
+    // Realizar una solicitud al endpoint del backend
+    axios.get(`${import.meta.env.VITE_BACKEND_URL}/api`)
+      .then(response => {
+        setApiResponse(response.data);
+      })
+      .catch(error => {
+        console.error('Error al conectar con el backend:', error);
+      });
+  }, []);
 
   return (
     <>
@@ -28,8 +41,12 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+      <div>
+        <h2>Respuesta del backend:</h2>
+        <p>{apiResponse}</p>
+      </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

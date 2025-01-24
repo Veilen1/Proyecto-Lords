@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 // Rutas
-app.get('/api', (req, res) => res.send('API funcionando'));
+app.get('/api', (req, res) => res.send('API funcionando anashe'));
 app.get('/', (req, res) => res.send('API raiz funcionando'));
 
 // Conexión con MongoDB
